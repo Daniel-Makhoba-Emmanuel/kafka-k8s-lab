@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Daniel-Makhoba-Emmanuel/kafka-k8s-lab.git
     targetRevision: HEAD
-    path: labs/lab0-bootstrap/argocd-apps
+    path: labs/lab0-bootstrap
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
