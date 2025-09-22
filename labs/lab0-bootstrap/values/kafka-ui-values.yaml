@@ -1,7 +1,0 @@
-envs:
-  - name: KAFKA_CLUSTERS_0_NAME
-    value: "lab-cluster"
-  - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
-    value: "lab-cluster-kafka-bootstrap.platform.svc:9092"
-service:
-  type: NodePort
