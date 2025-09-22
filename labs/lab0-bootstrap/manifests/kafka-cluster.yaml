@@ -22,12 +22,19 @@ spec:
       transaction.state.log.min.isr: 1
       auto.create.topics.enable: true
       log.retention.hours: 1
+      process.roles: broker,controller
+      node.id: 1
+      controller.quorum.voters: "1@my-cluster-kafka-0.my-cluster-kafka-headless.platform.svc:9093"
     storage:
       type: ephemeral
     resources:
-      requests: { cpu: "200m", memory: "512Mi" }
-      limits:   { cpu: "1", memory: "1Gi" }
-  zookeeper: { replicas: 0 }   # KRaft mode
+      requests:
+        cpu: "200m"
+        memory: "512Mi"
+      limits:
+        cpu: "1"
+        memory: "1Gi"
+
   entityOperator:
     topicOperator: {}
     userOperator: {}
