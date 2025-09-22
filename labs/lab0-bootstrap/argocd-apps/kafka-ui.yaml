@@ -13,8 +13,14 @@ spec:
     targetRevision: 0.7.5
     helm:
       releaseName: kafka-ui
-      valueFiles:
-        - ../../values/kafka-ui-values.yaml
+      values: |
+        envs:
+          - name: KAFKA_CLUSTERS_0_NAME
+            value: "lab-cluster"
+          - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
+            value: "lab-cluster-kafka-bootstrap.platform.svc:9092"
+        service:
+          type: NodePort
   destination:
     server: https://kubernetes.default.svc
     namespace: platform
