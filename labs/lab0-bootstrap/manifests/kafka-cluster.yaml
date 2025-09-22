@@ -19,8 +19,8 @@ spec:
     config:
       # reduce heap
       jvmOptions:
-        -Xms: "512m"
-        -Xmx: "512m"
+        "-Xms": "512m"
+        "-Xmx": "512m"
 
       # tiny dev retention
       log.retention.hours: 1
