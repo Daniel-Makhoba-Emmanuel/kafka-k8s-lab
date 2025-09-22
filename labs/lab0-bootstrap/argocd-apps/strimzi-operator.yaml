@@ -13,8 +13,18 @@ spec:
     targetRevision: 0.41.0
     helm:
       releaseName: strimzi
-      valueFiles:
-        - labs/lab0-bootstrap/values/strimzi-values.yaml 
+      values: |
+        watchNamespaces:
+          - platform
+
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "512Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+    
   destination:
     server: https://kubernetes.default.svc
     namespace: platform
