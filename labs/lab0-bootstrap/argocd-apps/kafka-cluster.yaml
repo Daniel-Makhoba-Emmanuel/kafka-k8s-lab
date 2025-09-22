@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Daniel-Makhoba-Emmanuel/kafka-k8s-labs.git
+    repoURL: https://github.com/Daniel-Makhoba-Emmanuel/kafka-k8s-lab.git
     targetRevision: HEAD
     path: labs/lab0-bootstrap/manifests
   destination:
