@@ -1,22 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kafka-cluster
+  name: bootstrap
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
     repoURL: https://github.com/Daniel-Makhoba-Emmanuel/kafka-k8s-lab.git
     targetRevision: HEAD
-    path: labs/lab1-topics_partitions_keys/manifests
+    path: labs/lab1-topics_partitions_keys/argocd-apps
   destination:
     server: https://kubernetes.default.svc
-    namespace: platform
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
