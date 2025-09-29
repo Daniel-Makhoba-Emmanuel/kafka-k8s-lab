@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-atmost
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer-atmost
+  template:
+    metadata:
+      labels:
+        app: consumer-atmost
+    spec:
+      containers:
+        - name: consumer
+          image: bitnami/kafka:latest
+          command:
+            - /opt/bitnami/kafka/bin/kafka-console-consumer.sh
+          args:
+            - --bootstrap-server
+            - dev-kafka-kafka-bootstrap.platform.svc:9092
+            - --topic
+            - orders
+            - --group
+            - atmost-group
+            - --from-beginning
+            - --enable-auto-commit
+            - "true"

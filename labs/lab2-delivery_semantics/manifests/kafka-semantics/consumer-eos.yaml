@@ -1,0 +1,27 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-eos
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer-eos
+  template:
+    metadata:
+      labels:
+        app: consumer-eos
+    spec:
+      containers:
+        - name: consumer
+          image: bitnami/kafka:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              kafka-console-consumer.sh
+              --bootstrap-server dev-kafka-kafka-bootstrap.platform.svc:9092
+              --topic orders
+              --group eos-group
+              --property isolation.level=read_committed;
