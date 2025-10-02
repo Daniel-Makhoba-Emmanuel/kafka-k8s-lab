@@ -20,7 +20,7 @@ spec:
             - /opt/bitnami/kafka/bin/kafka-console-consumer.sh
           args:
             - --bootstrap-server
-            - dev-kafka-kafka-bootstrap.platform.svc:9092
+            - my-cluster-kafka-bootstrap.platform.svc:9092
             - --topic
             - orders
             - --group

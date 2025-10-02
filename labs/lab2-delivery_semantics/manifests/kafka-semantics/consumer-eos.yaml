@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,8 +19,8 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - >
-              kafka-console-consumer.sh
-              --bootstrap-server dev-kafka-kafka-bootstrap.platform.svc:9092
-              --topic orders
-              --group eos-group
-              --property isolation.level=read_committed;
+              echo "Exactly-once semantics (EOS) require a producer configured with
+              'enable.idempotence=true' and 'transactional.id'. This cannot be
+              simulated with kafka-console-consumer. Replace this placeholder with
+              a custom app if you want to demo EOS in practice.";
+              sleep 3600
