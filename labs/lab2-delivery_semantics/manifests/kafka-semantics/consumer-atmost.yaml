@@ -16,9 +16,8 @@ spec:
       containers:
         - name: consumer
           image: confluentinc/cp-kafka:7.6.1
-
           command:
-            - /opt/bitnami/kafka/bin/kafka-console-consumer.sh
+            - /usr/bin/kafka-console-consumer
           args:
             - --bootstrap-server
             - my-cluster-kafka-bootstrap.platform.svc:9092
@@ -27,5 +26,12 @@ spec:
             - --group
             - atmost-group
             - --from-beginning
-            - --enable-auto-commit
-            - "true"
+            - --consumer.config
+            - /config/consumer.properties
+          volumeMounts:
+            - name: consumer-config
+              mountPath: /config
+      volumes:
+        - name: consumer-config
+          configMap:
+            name: consumer-config
