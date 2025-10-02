@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/Daniel-Makhoba-Emmanuel/kafka-k8s-lab.git   
     targetRevision: 'main'
-    path: manifests/kafka-semantics
+    path: labs/lab2-delivery_semantics/manifests/kafka-semantics
   destination:
     server: https://kubernetes.default.svc
     namespace: apps
