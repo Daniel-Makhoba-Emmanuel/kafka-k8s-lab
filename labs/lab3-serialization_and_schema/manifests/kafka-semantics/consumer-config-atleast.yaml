@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: consumer-config-atleast
+  namespace: apps
+data:
+  consumer.properties: |
+    enable.auto.commit=false
+    isolation.level=read_uncommitted
+    session.timeout.ms=30000
+    max.poll.records=10
