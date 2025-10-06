@@ -13,6 +13,9 @@ spec:
       releaseName: apicurio-registry
       values: |
         replicaCount: 1
+        kafka:
+          enabled: false  # ✅ Disable bundled Kafka subchart
+          bootstrapServers: "PLAINTEXT://my-cluster-kafka-bootstrap.platform.svc:9092"  # ✅ use your existing kafka
         persistence:
           enabled: true
         service:
