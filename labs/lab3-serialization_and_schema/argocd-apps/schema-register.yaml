@@ -3,6 +3,10 @@ kind: Application
 metadata:
   name: apicurio-registry
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -13,13 +17,30 @@ spec:
       releaseName: apicurio-registry
       values: |
         replicaCount: 1
+
         kafka:
-          enabled: false  # ✅ Disable bundled Kafka subchart
-          bootstrapServers: "PLAINTEXT://my-cluster-kafka-bootstrap.platform.svc:9092"  # ✅ use your existing kafka
+          enabled: false  # Disable bundled Kafka since you already have Strimzi
+
+        global:
+          kafka:
+            bootstrapServers: "my-cluster-kafka-bootstrap.platform.svc:9092"  # ✅ Use your existing Kafka
+
         persistence:
           enabled: true
+          accessModes:
+            - ReadWriteOnce
+          size: 1Gi
+
         service:
           type: ClusterIP
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: platform
