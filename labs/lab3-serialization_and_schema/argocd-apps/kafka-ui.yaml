@@ -20,6 +20,7 @@ spec:
           config:
             KAFKA_CLUSTERS_0_NAME: "my-cluster"                     # match your Kafka CR name
             KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "my-cluster-kafka-bootstrap.platform.svc:9092"
+            KAFKA_CLUSTERS_0_SCHEMAREGISTRY: "http://apicurio-registry.platform.svc:8080/apis/registry/v2"
         service:
           type: NodePort
   destination:
