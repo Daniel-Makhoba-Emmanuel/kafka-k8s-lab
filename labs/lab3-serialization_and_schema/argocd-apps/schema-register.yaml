@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: schema-registry
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://packages.confluent.io/helm
+    chart: confluent-schema-registry
+    targetRevision: 0.6.1
+    helm:
+      releaseName: schema-registry
+      values: |
+        kafka:
+          bootstrapServers: "PLAINTEXT://my-cluster-kafka-bootstrap.platform.svc:9092"
+        image:
+          tag: 7.5.0
+        service:
+          type: ClusterIP
+        configurationOverrides:
+          schema.compatibility.level: BACKWARD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: platform
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
